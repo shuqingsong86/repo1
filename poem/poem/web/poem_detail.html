@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>古诗文列表</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/offcanvas.css" rel="stylesheet">
+      <script src="js/jquery-3.3.1.js"></script>
+      <script src="js/bootstrap.js"></script>
+      <script src="js/offcanvas.js"></script>
+
+      <style>
+          body{
+              font-family: 楷体;
+              font-size: 20px;
+          }
+      </style>
+        <script>
+            var id = location.search.split("=")[1];
+            $(function(){
+                $.get("poem/findOneById",{id:id},function(data){
+                    $("#title").html(data.title);
+                    $("#author").html(data.dynasty+":"+data.author).append('<br>');
+                    //$("#content").html(data.content);
+              /*      var contents = data.content.split("。");
+                    $("#content").each(function (index) {
+                        this.innerHTML=contents[index].append(".");
+                    });*/
+                    var contents = data.content.split("。");
+                for(var i = 0;i<contents.length-1;i++){
+                    var x = contents[i];
+                    $("#row").append(x+"。"+'<br>');
+                }
+                });
+
+            });
+        </script>
+  </head>
+
+  <body>
+    <div class="container text-center">
+        <!--诗文详情内容-->
+        <div class="row" id="row">
+            <h2 id="title">春晓</h2>
+            <small id="author">唐代：孟浩然</small>
+            <p id="content"></p>
+        </div>
+        <footer>
+            <a href="poem_list.html?category=乐府">乐府</a>|
+            <a href="poem_list.html?category=唐诗三百首">唐诗三百首</a>|
+            <a href="poem_list.html?category=宋词三百首">宋词三百首</a>|
+            <a href="poem_list.html?category=古诗十九首">古诗十九首</a>|
+            <a href="poem_list.html?category=楚辞">楚辞</a>|
+            <a href="poem_list.html?category=诗经">诗经</a>
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
